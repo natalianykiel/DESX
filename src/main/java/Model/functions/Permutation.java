@@ -45,7 +45,7 @@ public class Permutation {
             int col = getCollumn(SixBits);
             byte number = Tables.SBOX[i][col][row];
 
-            byte[] postacBinarna = Converter.ConvertByteNumberTo4b(number);
+            byte[] postacBinarna = Converter.byteNumberTo4bTab(number);
             System.arraycopy(postacBinarna, 0, wynik, 1 * 4, 4);
         }
         return wynik;

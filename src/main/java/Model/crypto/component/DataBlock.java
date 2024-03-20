@@ -21,7 +21,7 @@ public class DataBlock {
 
     public DataBlock(byte [] binaryBlock) {
         block = binaryBlock;
-        //PIERWSZA PERMUTACJA TA POPRZEDZAJACA PODZIAL NA 32BITY
+        //PIERWSZA PERMUTACJA TA POPRZEDZAJACA PODZIAL NA 32BITY - INITIAL PERMUTATION
         initialPermutation = Permutation.Permutation(Tables.IP, block, 64);
         //System.arraycopy(initialPermutation, 0, left, 0, 32);
         //System.arraycopy(initialPermutation, 32, right, 0, 32);

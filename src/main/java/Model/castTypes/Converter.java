@@ -2,12 +2,8 @@ package Model.castTypes;
 
 public class Converter {
 
-    /**
-     * Potrzebne przy sbox w Permutation
-     * @param number
-     * @return
-     */
-    public static byte[] ConvertByteNumberTo4b(byte number){
+    //POTRZEBNE DO PERMUTACJI Z WZORCEM S-BOX
+    public static byte[] byteNumberTo4bTab(byte number){
         byte[] blockByte = new byte[4];
         byte temporaryByte;
         //dla 10 dostaniemy pokolei 0, 1, 0, 1 czyli jest odwrócone
@@ -25,19 +21,8 @@ public class Converter {
         return blockByte;
     }
 
-    public  static byte[] byteTabToBinary(byte[] bytes){
-        int iteracje=0;
-        byte[] wynik = new byte[64];
-        for(int i=0; i<8; i++){
-            byte[] bits8 = byteTo8BitTable(bytes[i]);
-            for(int j=0; j<8; j++){
-                wynik[iteracje++] = bits8[j];
-            }
-        }
-        return wynik;
-    }
-    ///potrzebne do des
-    public static byte[] byteTo8BitTable(byte value) {
+    // POTRZEBNE DO byteTabTo8bTab
+    public static byte[] byteNumberTo8bTab(byte value) {
         byte[] finalForm = new byte[8];
         int number = value;
         if (number > 0) {
@@ -65,6 +50,20 @@ public class Converter {
         return finalForm;
     }
 
+    //POTRZEBNE DO KONWERSJI KLUCZA NA 64 BITY
+    public  static byte[] byteTabTo8bTab(byte[] bytes){
+        int iteracje=0;
+        byte[] wynik = new byte[64];
+        for(int i=0; i<8; i++){
+            byte[] bits8 = byteNumberTo8bTab(bytes[i]);
+            for(int j=0; j<8; j++){
+                wynik[iteracje++] = bits8[j];
+            }
+        }
+        return wynik;
+    }
+
+    //POTRZEBNE DO KONWERSJI WYNIKU DZIAŁANIA DES NA BYTE
     public static byte[] binaryChainToByteForm(byte[] bits) {
         int iterator = 0;
         byte[] finalForm = new byte[8];
@@ -79,5 +78,14 @@ public class Converter {
             }
         }
         return finalForm;
+    }
+
+    public static byte[] getCountOfBytes(byte[] bytes, int index, int count) {
+        byte[] temp = new byte[count];
+        for (int i = 0; i < count; i++) {
+            temp[i] = bytes[index];
+            index++;
+        }
+        return temp;
     }
 }
