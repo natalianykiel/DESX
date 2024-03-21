@@ -1,4 +1,4 @@
-package Model.functions;
+package project.Model.functions;
 
 public class XOR {
     public static byte[] XOR(byte[] operandA, byte[] operandB){

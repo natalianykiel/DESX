@@ -1,4 +1,4 @@
-package Model.crypto.algorithm;
+package project.Model.crypto.algorithm;
 
 public interface Algorithm {
     byte[] encrypt(byte[] plainText, byte[] keyInternal, byte[] keyDes, byte[] keyExternal);

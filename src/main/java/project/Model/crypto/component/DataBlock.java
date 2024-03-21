@@ -1,8 +1,8 @@
-package Model.crypto.component;
+package project.Model.crypto.component;
 
 
-import Model.patterns.Tables;
-import Model.functions.Permutation;
+import project.Model.patterns.Tables;
+import project.Model.functions.Permutation;
 
 //szybkie wytlumaczenie
 //w des na poczatku rb sie takie fiku miku

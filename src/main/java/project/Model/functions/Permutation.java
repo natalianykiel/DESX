@@ -1,7 +1,7 @@
-package Model.functions;
+package project.Model.functions;
 
-import Model.castTypes.Converter;
-import Model.patterns.Tables;
+import project.Model.castTypes.Converter;
+import project.Model.patterns.Tables;
 
 
 public class Permutation {

@@ -1,7 +1,7 @@
-package Model.crypto.algorithm;
+package project.Model.crypto.algorithm;
 
-import Model.castTypes.Converter;
-import Model.functions.XOR;
+import project.Model.castTypes.Converter;
+import project.Model.functions.XOR;
 
 public class DesX {
 

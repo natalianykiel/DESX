@@ -1,12 +1,12 @@
-package Model.crypto.algorithm;
+package project.Model.crypto.algorithm;
 
-import Model.crypto.component.DataBlock;
-import Model.crypto.component.KeyBlock;
-import Model.patterns.Tables;
-import Model.castTypes.Converter;
+import project.Model.crypto.component.DataBlock;
+import project.Model.crypto.component.KeyBlock;
+import project.Model.patterns.Tables;
+import project.Model.castTypes.Converter;
 
-import Model.functions.XOR;
-import Model.functions.Permutation;
+import project.Model.functions.XOR;
+import project.Model.functions.Permutation;
 
 public class Des {
     private DataBlock dataBlock;

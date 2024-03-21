@@ -1,7 +1,7 @@
-package Model.crypto.component;
+package project.Model.crypto.component;
 
-import Model.patterns.Tables;
-import Model.functions.Permutation;
+import project.Model.patterns.Tables;
+import project.Model.functions.Permutation;
 
 public class KeyBlock {
     //nazywam te klucze tak bo kazdy jest to innej dlugosci

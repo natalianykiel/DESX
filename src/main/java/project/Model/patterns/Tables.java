@@ -1,4 +1,4 @@
-package Model.patterns;
+package project.Model.patterns;
 
 public class Tables {
     // Początkowa permutacja dla danych wejsciowych(IP)
