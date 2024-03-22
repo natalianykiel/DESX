@@ -101,6 +101,7 @@ public class Menu {
     //OBSŁUGA NACISKANIA PRZYCISKÓW
 
     //AKCJA PO NACISNIĘCIU PRZYCISKU "ENCRYPT"
+
     public void onCodeButton (ActionEvent actionEvent){
         try{
             byte[] kluczWewnetrzny = ConverterGUI.stringToByteTab(keyText1.getText());
@@ -301,7 +302,7 @@ public class Menu {
         } catch (Exception ignored) {
         }
     }
-
+/*
     //GENEROWANIE KLUCZY
     private String generateKey(int length) throws UnsupportedEncodingException {
         int leftLimit = 97; // letter 'a'
@@ -331,7 +332,7 @@ public class Menu {
         genSecondKey();
         genThirdKey();
     }
-
+*/
 
 
 

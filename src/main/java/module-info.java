@@ -1,6 +1,7 @@
 module com.example.krypto1 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens project.View.krypto1 to javafx.fxml;
