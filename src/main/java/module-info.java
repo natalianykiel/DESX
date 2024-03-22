@@ -3,6 +3,8 @@ module com.example.krypto1 {
     requires javafx.fxml;
 
 
-    opens com.example.krypto1 to javafx.fxml;
-    exports com.example.krypto1;
+    opens project.View.krypto1 to javafx.fxml;
+    exports project.View.krypto1;
+        exports project.View;
+        opens project.View to javafx.fxml;
 }
