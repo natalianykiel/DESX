@@ -82,8 +82,7 @@ public class Converter {
         return finalForm;
     }
 
-    //to do GUI ale zmienie to jeszcze chyba
-
+    //LICZENIE LICZBY BYTE POTRZEBNE W DESX
     public static byte[] getCountOfBytes(byte[] bytes, int index, int count) {
         byte[] temp = new byte[count];
         for (int i = 0; i < count; i++) {
@@ -92,63 +91,4 @@ public class Converter {
         }
         return temp;
     }
-
-    public static byte[] stringToByteTab(String bytes) {
-        byte[] temp = new byte[bytes.length()];
-        for (int i = 0; i < bytes.length(); i++) {
-            temp[i] = (byte) bytes.charAt(i);
-        }
-        return temp;
-    }
-
-    public static byte[] completeTheBits(byte[] bytes) {
-        int numberOfBytes = bytes.length;
-        byte howMany = 0;
-        while (numberOfBytes % 8 != 0) {
-            numberOfBytes++;
-            howMany++;
-        }
-        byte[] filled = new byte[numberOfBytes];
-        System.arraycopy(bytes, 0, filled, 0, bytes.length);
-        if(howMany != 0) {
-            Arrays.fill(filled,bytes.length, numberOfBytes, (byte) 0);
-            filled[filled.length-1] = howMany;
-        }
-        return filled;
-    }
-
-    /**
-     * Method that is Truncates the number of bytes specified at the end
-     * @param bytes Byte Array
-     * @return byte Table
-     */
-
-    public static byte[] cutLastBytes(byte[] bytes) {
-        int howMany = bytes[bytes.length-1];
-        int size = bytes.length-howMany;
-        if(howMany > 31 || howMany < 0) {
-            return bytes;
-        }
-
-        byte[] filled = new byte[size];
-
-        System.arraycopy(bytes, 0, filled,0,size);
-
-        return filled;
-    }
-
-    public static String byteTabToString(byte[] bytes) {
-        StringBuilder temp = new StringBuilder();
-        int len = bytes.length;
-        for (int i = 0; i < len; i++) {
-            temp.append((char) bytes[i]);
-        }
-        return temp.toString();
-    }
-
-
-
-
-
-
 }

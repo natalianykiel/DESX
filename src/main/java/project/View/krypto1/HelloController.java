@@ -1,4 +1,4 @@
-package com.example.krypto1;
+package project.View.krypto1;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

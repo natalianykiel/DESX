@@ -4,9 +4,6 @@ import project.Model.patterns.Tables;
 import project.Model.functions.Permutation;
 
 public class KeyBlock {
-    //nazywam te klucze tak bo kazdy jest to innej dlugosci
-    //polecam wyklad str 8 tam masz wytlumaczone czm 48, 56 i 64
-
     private byte[] key56;
     private byte[] key48 = new byte[48];
     private byte[] key64;
@@ -49,7 +46,6 @@ public class KeyBlock {
         for (int j = 0; j < 48; j++) {
             last16Podklucz[podkluczNumber][j] = key48[j];
         }
-
     }
 }
 

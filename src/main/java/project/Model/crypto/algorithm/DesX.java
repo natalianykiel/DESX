@@ -9,13 +9,13 @@ public class DesX {
         Des des = new Des();
         byte[] finalText = new byte[plainText.length];
         for(int i = 0; i < plainText.length/8; i++){
-            //The block is Xor-processed
+            //blok poddajemy xor'owaniu
             byte[] tmp = XOR.XOR(Converter.getCountOfBytes(plainText, i * 8, 8), keyInternal);
-            //The block is DES-processed
+            //blok przechodzi proces enkrypcji DES
             tmp  = des.encrypt(tmp, keyDes);
-            //The block is again Xor-processed
+            //ponowne xor'owanie bloku
             tmp = XOR.XOR(keyExternal,tmp);
-            //rewriting the block (8 bytes) to the resulting Array
+            //przepisywanie 8 byte'ów wynikowych
             System.arraycopy(tmp, 0, finalText, i * 8, 8);
         }
         return finalText;
@@ -25,13 +25,13 @@ public class DesX {
         Des des = new Des();
         byte[] finalText = new byte[plainText.length];
         for(int i = 0; i < plainText.length/8; i++){
-            //The block is Xor-processed
+            //blok poddajemy xor'owaniu
             byte[] tmp = XOR.XOR(Converter.getCountOfBytes(plainText, i * 8, 8), keyExternal);
-            //The block is DES-processed
+            //blok przechodzi proces enkrypcji DES
             tmp = des.decrypt(tmp, keyDes);
-            //The block is again Xor-processed
+            //ponowne xor'owanie bloku
             tmp = XOR.XOR(keyInternal,tmp);
-            //rewriting the block (8 bytes) to the resulting Array
+            //przepisywanie 8 byte'ów wynikowych
             System.arraycopy(tmp, 0, finalText, i * 8, 8);
         }
         return finalText;

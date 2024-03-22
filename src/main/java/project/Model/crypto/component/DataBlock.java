@@ -4,16 +4,7 @@ package project.Model.crypto.component;
 import project.Model.patterns.Tables;
 import project.Model.functions.Permutation;
 
-//szybkie wytlumaczenie
-//w des na poczatku rb sie takie fiku miku
-// ze wprowadzone dane sie permutuje a nastepnie dzieli
-//i dostajesz lewy i praewy blok kazdy po 32 bity i wsm to tu rb
 public class DataBlock {
-
-    //block: Tablica bajtów reprezentująca blok danych wejściowych.
-    //initialPermutation: Tablica bajtów reprezentująca blok danych po początkowej permutacji.
-    //left i right: Tablice bajtów reprezentujące lewą i prawą połowę bloku danych.
-
     private byte[] block;
     private byte[] initialPermutation;
     private final byte[] left = new byte[32];

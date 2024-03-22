@@ -12,7 +12,6 @@ public class Permutation {
      * @param length
      * @return Permuted Array
      */
-
     public static byte[] Permutation(byte[] pattern, byte[] ToBePermutedBlock, int length){
         // byte[] pattern - wzorzec permutacji
         // byte [] ToBePermutedBlock - tablica bytów do poddania permutacji
@@ -29,13 +28,11 @@ public class Permutation {
         }
         return permutedBlock;
     }
-
     /**
      * Konwersja 48 bit na 32 bity (sbox)
      * @param the48Block
      * @return
      */
-
     public static byte[] sBoxTransformation(byte[] the48Block){
         byte[] wynik = new byte[32];
         for(int i=0; i< 8; i++){
