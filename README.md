@@ -1,4 +1,4 @@
-# Kryptografia
+# DESX
 DESX ALGORITHM 
 
 Overview:
