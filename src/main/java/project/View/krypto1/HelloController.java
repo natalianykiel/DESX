@@ -160,7 +160,7 @@ public class HelloController {
 
             //dane tekstowe w postaci byte'ów
             byte[] textAreaInByte = null;
-                textAreaInByte = codedFileInByteForm;
+            textAreaInByte = codedFileInByteForm;
                 normalFileInByteForm = desX.decrypt(textAreaInByte, kluczWewnetrzny, kluczDES, kluczZewnetrzny);
                 normalFileInByteForm = ConverterGUI.cutLastBytes(normalFileInByteForm);
                 finfoText.setText("Odkodowany plik znajduje się w buforze");
@@ -219,7 +219,7 @@ public class HelloController {
             if(isCoded){
                 saveNormalFile = name+"encoded";
                 fileExtension = ".txt";
-                fh.writeToFile(name,
+                fh.writeToFile(saveNormalFile,
                         extension,
                         ConverterGUI.stringToByteTab(fkeyText1.getText()),
                         ConverterGUI.stringToByteTab(fkeyText2.getText()),
@@ -289,8 +289,6 @@ public class HelloController {
     private static String getFileName(File file){
         String fileName = file.getName();
         int dotIndex = fileName.lastIndexOf('.');
-        String nameWithoutExtension = (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
-        int encodedIndex = nameWithoutExtension.indexOf("encoded");
-        return (encodedIndex == -1) ? nameWithoutExtension : nameWithoutExtension.substring(0, encodedIndex);
+        return (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
     }
 }

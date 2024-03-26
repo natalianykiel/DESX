@@ -16,7 +16,7 @@ public class FileHandler {
 
             for (int i = 0; i < lines.size(); i++) {
                 if (lines.get(i).startsWith(filename)) {
-                    lines.set(i, filename + "," + extension + "," + Arrays.toString(key1) + "," + Arrays.toString(key2) + "," + Arrays.toString(key3));
+                    lines.set(i, filename + "," + extension + "," + key1 + "," + key2 + "," + key3);
                     found = true;
                     System.out.println("Znaleziono plik w bazie");
                     break;
@@ -26,7 +26,7 @@ public class FileHandler {
 
         if (!found) {
             System.out.println("Dodano plik do bazy");
-            lines.add(filename + "," + extension + "," + Arrays.toString(key1) + "," + Arrays.toString(key2) + "," + Arrays.toString(key3));
+            lines.add(filename + "," + extension + "," + key1 + "," + key2 + "," + key3);
         }
 
         Files.write(file.toPath(), lines);
