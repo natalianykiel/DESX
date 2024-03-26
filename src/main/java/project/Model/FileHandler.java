@@ -37,7 +37,7 @@ public class FileHandler {
             List<String> lines = new ArrayList<>(Files.readAllLines(file.toPath()));
 
             for (String line : lines) {
-                if (line.startsWith(filename)) {
+                if (line.split(",")[0].equals(filename)) {
                     return line.split(",");
                 }
             }

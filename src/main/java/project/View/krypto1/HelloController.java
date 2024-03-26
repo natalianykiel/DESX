@@ -150,21 +150,18 @@ public class HelloController {
     @FXML
     protected void onFileDecryptClick() {
         try{
-            byte[] kluczWewnetrzny;
-            byte[] kluczDES;
-            byte[] kluczZewnetrzny;
+            byte[] kluczWewnetrzny = ConverterGUI.stringToByteTab(fkeyText1.getText());
+            byte[] kluczDES = ConverterGUI.stringToByteTab(fkeyText2.getText());
+            byte[] kluczZewnetrzny = ConverterGUI.stringToByteTab(fkeyText3.getText());
 
-                kluczWewnetrzny = ConverterGUI.stringToByteTab(fkeyText1.getText());
-                kluczDES = ConverterGUI.stringToByteTab(fkeyText2.getText());
-                kluczZewnetrzny = ConverterGUI.stringToByteTab(fkeyText3.getText());
 
             //dane tekstowe w postaci byte'ów
             byte[] textAreaInByte = null;
             textAreaInByte = codedFileInByteForm;
-                normalFileInByteForm = desX.decrypt(textAreaInByte, kluczWewnetrzny, kluczDES, kluczZewnetrzny);
-                normalFileInByteForm = ConverterGUI.cutLastBytes(normalFileInByteForm);
-                finfoText.setText("Odkodowany plik znajduje się w buforze");
-                isCoded = false;
+            normalFileInByteForm = desX.decrypt(textAreaInByte, kluczWewnetrzny, kluczDES, kluczZewnetrzny);
+            normalFileInByteForm = ConverterGUI.cutLastBytes(normalFileInByteForm);
+            finfoText.setText("Odkodowany plik znajduje się w buforze");
+            isCoded = false;
 
 
         } catch (Exception e){
@@ -181,7 +178,6 @@ public class HelloController {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open File");
             normalFileBuffer = fileChooser.showOpenDialog(normalFileStage);
-            normalFileInByteForm = Files.readAllBytes(Path.of(normalFileBuffer.getAbsolutePath()));
 
             finfoText.setText("Wczytano plik: " + normalFileBuffer.getAbsolutePath());
 
@@ -189,16 +185,18 @@ public class HelloController {
                 System.out.println("Plik wczytany z buforu");
                 extension = getFileExtension(normalFileBuffer);
                 name = getFileName(normalFileBuffer);
+                normalFileInByteForm = Files.readAllBytes(Path.of(normalFileBuffer.getAbsolutePath()));
                 isCoded = false;
             }else {
                 System.out.println("Plik wczytany z bazy");
-                String tab[] = new String[5];
+                String[] tab = new String[5];
                 tab = fh.getMetadata(getFileName(normalFileBuffer));
-                name = tab[0];
+                name = tab[0].substring(0,tab[0].length()-7);
                 extension = tab[1];
                 fkeyText1.setText(tab[2]);
                 fkeyText2.setText(tab[3]);
                 fkeyText3.setText(tab[4]);
+                codedFileInByteForm = Files.readAllBytes(Path.of(normalFileBuffer.getAbsolutePath()));
                 isCoded = true;
             }
             
@@ -231,7 +229,11 @@ public class HelloController {
             }
 
             try (FileOutputStream fos = new FileOutputStream(directory+"\\"+saveNormalFile+fileExtension/*.getText()*/)) {
-                fos.write(normalFileInByteForm);
+                if(isCoded){
+                    fos.write(codedFileInByteForm);
+                }else {
+                    fos.write(normalFileInByteForm);
+                }
                 fos.close();
                 //saveNormalFile.clear();
                 finfoText.setText("Plik został zapisany w :" + directory+"\\"+saveNormalFile+fileExtension);
