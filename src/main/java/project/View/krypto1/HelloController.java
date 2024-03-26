@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import project.Model.FileHandler;
 import project.Model.castTypes.ConverterGUI;
 import project.Model.crypto.algorithm.DesX;
 
@@ -35,6 +36,10 @@ public class HelloController {
     private boolean isCoded = false;
     //zmienna do przechowania rozszerzenia pliku
     private String extension;
+
+    private String name;
+
+    private FileHandler fh = new FileHandler();
 
     @FXML
     private TextArea normalText;
@@ -130,8 +135,10 @@ public class HelloController {
             textAreaInByte = normalFileInByteForm;
             textAreaInByte = ConverterGUI.completeTheBits((textAreaInByte));
             codedFileInByteForm = desX.encrypt(textAreaInByte, kluczWewnetrzny, kluczDES, kluczZewnetrzny);
+
             finfoText.setText("Plik został zaszyfrowany i przeniesiony do buforu");
             isCoded = true;
+
 
         } catch (Exception e){
             try{
@@ -143,18 +150,22 @@ public class HelloController {
     @FXML
     protected void onFileDecryptClick() {
         try{
-            byte[] kluczWewnetrzny = ConverterGUI.stringToByteTab(fkeyText1.getText());
-            byte [] kluczDES = ConverterGUI.stringToByteTab(fkeyText2.getText());
-            byte [] kluczZewnetrzny = ConverterGUI.stringToByteTab(fkeyText3.getText());
+            byte[] kluczWewnetrzny;
+            byte[] kluczDES;
+            byte[] kluczZewnetrzny;
+
+                kluczWewnetrzny = ConverterGUI.stringToByteTab(fkeyText1.getText());
+                kluczDES = ConverterGUI.stringToByteTab(fkeyText2.getText());
+                kluczZewnetrzny = ConverterGUI.stringToByteTab(fkeyText3.getText());
 
             //dane tekstowe w postaci byte'ów
             byte[] textAreaInByte = null;
-
                 textAreaInByte = codedFileInByteForm;
                 normalFileInByteForm = desX.decrypt(textAreaInByte, kluczWewnetrzny, kluczDES, kluczZewnetrzny);
                 normalFileInByteForm = ConverterGUI.cutLastBytes(normalFileInByteForm);
                 finfoText.setText("Odkodowany plik znajduje się w buforze");
                 isCoded = false;
+
 
         } catch (Exception e){
             try{
@@ -174,9 +185,21 @@ public class HelloController {
 
             finfoText.setText("Wczytano plik: " + normalFileBuffer.getAbsolutePath());
 
-            if(!isCoded){
+            if(fh.getMetadata(getFileName(normalFileBuffer))==null) {
+                System.out.println("Plik wczytany z buforu");
                 extension = getFileExtension(normalFileBuffer);
+                name = getFileName(normalFileBuffer);
+            }else {
+                System.out.println("Plik wczytany z bazy");
+                String tab[] = new String[5];
+                tab = fh.getMetadata(getFileName(normalFileBuffer));
+                name = tab[0];
+                extension = tab[1];
+                fkeyText1.setText(tab[2]);
+                fkeyText2.setText(tab[3]);
+                fkeyText3.setText(tab[4]);
             }
+
 
         } catch (Exception ignored) {
         }
@@ -194,10 +217,15 @@ public class HelloController {
             String fileExtension;
 
             if(isCoded){
-                saveNormalFile = "encoded";
+                saveNormalFile = name+"encoded";
                 fileExtension = ".txt";
+                fh.writeToFile(name,
+                        extension,
+                        ConverterGUI.stringToByteTab(fkeyText1.getText()),
+                        ConverterGUI.stringToByteTab(fkeyText2.getText()),
+                        ConverterGUI.stringToByteTab(fkeyText3.getText()));
             }else{
-                saveNormalFile = "decoded";
+                saveNormalFile = name+"decoded";
                 fileExtension = "."+extension;
             }
 
@@ -258,4 +286,11 @@ public class HelloController {
         return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
     }
 
+    private static String getFileName(File file){
+        String fileName = file.getName();
+        int dotIndex = fileName.lastIndexOf('.');
+        String nameWithoutExtension = (dotIndex == -1) ? fileName : fileName.substring(0, dotIndex);
+        int encodedIndex = nameWithoutExtension.indexOf("encoded");
+        return (encodedIndex == -1) ? nameWithoutExtension : nameWithoutExtension.substring(0, encodedIndex);
+    }
 }
