@@ -189,6 +189,7 @@ public class HelloController {
                 System.out.println("Plik wczytany z buforu");
                 extension = getFileExtension(normalFileBuffer);
                 name = getFileName(normalFileBuffer);
+                isCoded = false;
             }else {
                 System.out.println("Plik wczytany z bazy");
                 String tab[] = new String[5];
@@ -198,9 +199,9 @@ public class HelloController {
                 fkeyText1.setText(tab[2]);
                 fkeyText2.setText(tab[3]);
                 fkeyText3.setText(tab[4]);
+                isCoded = true;
             }
-
-
+            
         } catch (Exception ignored) {
         }
     }
@@ -221,9 +222,9 @@ public class HelloController {
                 fileExtension = ".txt";
                 fh.writeToFile(saveNormalFile,
                         extension,
-                        ConverterGUI.stringToByteTab(fkeyText1.getText()),
-                        ConverterGUI.stringToByteTab(fkeyText2.getText()),
-                        ConverterGUI.stringToByteTab(fkeyText3.getText()));
+                        fkeyText1.getText(),
+                        fkeyText2.getText(),
+                        fkeyText3.getText());
             }else{
                 saveNormalFile = name+"decoded";
                 fileExtension = "."+extension;

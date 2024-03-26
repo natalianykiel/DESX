@@ -7,7 +7,7 @@ import java.util.*;
 public class FileHandler {
     private File file = new File("src/main/java/project/Model/metadata.txt");
 
-    public void writeToFile(String filename, String extension, byte[] key1, byte[] key2, byte[] key3) throws IOException {
+    public void writeToFile(String filename, String extension, String key1, String key2, String key3) throws IOException {
         List<String> lines = new ArrayList<>();
         boolean found = false;
 
